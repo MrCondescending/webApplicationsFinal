@@ -1,5 +1,25 @@
 <?php
   include('config.php');
+
+  include('functions.php');
+
+  $usernameInvalid = false; //For error message about invalid username
+  // If form submitted:
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  	// Get username and password from the form as variables
+  	$username = $_POST['login'];
+  	$password = $_POST['password'];
+    $password_verify = $_POST['password_verify'];
+    $date = date('Y-m-d');
+
+    if(validPassword($password, $password_verify) && noUserExists($username, $database)){
+      createUser($username, $password, $date, $database);
+      header('location: login.php');
+      die();
+    }else {
+      $usernameInvalid = true;
+    }
+  }
  ?>
 <html>
 
@@ -17,15 +37,16 @@
         <!-- Login Form -->
         <form method="POST">
           <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-          <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-          <input type="password" id="password_verify" class="fadeIn third" name="login" placeholder="re-enter password">
+          <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+          <input type="password" id="password" class="fadeIn third" name="password_verify" placeholder="re-enter password">
           <input type="submit" class="fadeIn fourth" value="Sign Up">
         </form>
-
+        <p style="color:red;" ><?php if($usernameInvalid): ?> The username you have selected has already been used, try again</p>
+        <?php endif;?>
         <!-- Remind Passowrd -->
         <div id="formFooter">
           <a class="underlineHover" href="#">Forgot Password?</a><br>
-          <a class="underlineHover" href="signup.php"> No Account? Click here to sign up!</a>
+          <a class="underlineHover" href="login.php">Return to sign-in</a>
         </div>
 
       </div>
