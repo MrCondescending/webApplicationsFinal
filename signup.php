@@ -18,7 +18,8 @@
         <form method="POST">
           <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
           <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-          <input type="submit" class="fadeIn fourth" value="Log In">
+          <input type="password" id="password_verify" class="fadeIn third" name="login" placeholder="re-enter password">
+          <input type="submit" class="fadeIn fourth" value="Sign Up">
         </form>
 
         <!-- Remind Passowrd -->
