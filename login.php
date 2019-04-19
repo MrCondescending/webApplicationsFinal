@@ -19,9 +19,10 @@
   	// If $users is not empty
   	if(!empty($users)) {
   		// Set $user equal to the first result of $users
-  		$user = $users[0];
+      $user = $users[0];
   		// Set a session variable with a key of customerID equal to the customerID returned
   		$_SESSION['username'] = $user['username'];
+
   		// Redirect to the index.php file
   		header('location: profile.php');
   		die();

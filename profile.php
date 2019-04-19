@@ -1,7 +1,9 @@
 <?php
   include('config.php');
 
-  
+  $username = $_SESSION['username'];
+  $user = new User($username, $database);
+  $_SESSION['user'] = $user;
 ?>
 <!doctype html>
 <html lang="en">
@@ -54,7 +56,7 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Hello, <?php echo $customer['username']?>!</h1>
+          <h1 class="display-3">Hello, <?php echo $user->getUsername()?>!</h1>
           <p>Welcome back to the group calendar! Your account was created on: <?php echo substr($customer['created_date'], 0 , 10) ?></p>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Click here to edit your profile &raquo;</a></p>
         </div>
