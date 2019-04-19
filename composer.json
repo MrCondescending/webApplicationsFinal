@@ -1,0 +1,15 @@
+{
+    "name": "workmand/web-applications-final",
+    "description": "Final Project for CSC 301",
+    "type": "project",
+    "require": {
+        "components/jquery": "^3.3",
+        "twitter/bootstrap": "^4.3"
+    },
+    "authors": [
+        {
+            "name": "MrCondescending",
+            "email": "workmand1@mymail.nku.edu"
+        }
+    ]
+}
