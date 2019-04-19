@@ -14,6 +14,7 @@
 
     if(validPassword($password, $password_verify) && noUserExists($username, $database)){
       createUser($username, $password, $date, $database);
+      createUserGroup($username, $database);
       header('location: login.php');
       die();
     }else {

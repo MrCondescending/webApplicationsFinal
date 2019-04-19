@@ -26,12 +26,20 @@
   }
 
   function createUser($username, $password, $date, $database){
-    // Query records that have usernames and passwords that match those in the customers table
     $sql = file_get_contents('sql/createUser.sql');
     $params = array (
       'username' => $username,
       'password' => $password,
       'dateEntry' => $date
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+  }
+
+  function createUserGroupRow($username, $database){
+    $sql = file_get_contents('sql/createUserGroup.sql');
+    $params = array (
+      'username' => $username
     );
     $statement = $database->prepare($sql);
     $statement->execute($params);
