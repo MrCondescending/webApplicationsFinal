@@ -4,6 +4,8 @@
   $username = $_SESSION['username'];
   $user = new User($username, $database);
   $_SESSION['user'] = $user;
+
+  $users_groups = getGroups($user->getUsername(), $database);
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,36 +58,39 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Hello, <?php echo $user->getUsername()?>!</h1>
+          <h1 class="display-3">Hello, <?php if($user->getFirstName() == ''){ echo $user->getUsername();}else{echo $user->getFirstName();}?>!</h1>
           <p>Welcome back to the group calendar! Your account was created on: <?php echo substr($customer['created_date'], 0 , 10) ?></p>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Click here to edit your profile &raquo;</a></p>
         </div>
       </div>
 
-      <div class="container">
-        <!-- Example row of columns -->
+      <?php if($users_groups['groups'] != ''): ?>
+        <div class="container">
+          <!-- Example row of columns -->
+          <?php
+            $groups_arr = explode(';', $users_groups['groups']);?>
+
+
+            <div class="row">
+              <?php foreach($groups_arr as $group): ?>
+              <div class="col-md-4">
+                <h2><?php echo $group; ?></h2>
+                <p><?php echo getGroupDescription($group, $database); ?></p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              </div>
+              <?php endforeach; ?>
+            </div>
+
+          <hr>
+
+        </div> <!-- /container -->
+      <?php else: ?>
         <div class="row">
           <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <center><p>It seems that you have not added any groups yet! Click the "Groups" button on the top bar to search for groups to add!</p>
           </div>
         </div>
-
-        <hr>
-
-      </div> <!-- /container -->
-
+      <?php endif;?>
     </main>
 
     <footer class="container">

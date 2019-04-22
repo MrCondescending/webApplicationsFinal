@@ -44,3 +44,28 @@
     $statement = $database->prepare($sql);
     $statement->execute($params);
   }
+
+  function getGroups($username, $database){
+    $sql = file_get_contents('sql/getGroups.sql');
+    $params = array (
+      'username' => $username
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+    $groups = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $groups = $groups[0];
+    return $groups;
+  }
+
+  function getGroupDescription($groupname, $database){
+    $sql = file_get_contents('sql/getGroup.sql');
+    $params = array (
+      'groupname' => $groupname
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+    $groups = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $group_description = $groups[0];
+    $group_description = $group_description['group_description'];
+    return $group_description;
+  }
