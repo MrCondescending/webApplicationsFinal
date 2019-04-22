@@ -69,3 +69,33 @@
     $group_description = $group_description['group_description'];
     return $group_description;
   }
+
+  function updateUserPassword($password, $username, $database){
+    $sql = file_get_contents('sql/updateUserPassword.sql');
+    $params = array (
+      'username' => $username,
+      'password' => $password
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+  }
+
+  function updateUserFirstName($firstName, $username, $database){
+    $sql = file_get_contents('sql/updateFirstName.sql');
+    $params = array (
+      'username' => $username,
+      'fname' => $firstName
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+  }
+
+  function updateUserLastName($lastName, $username, $database){
+    $sql = file_get_contents('sql/updateLastName.sql');
+    $params = array (
+      'username' => $username,
+      'lname' => $lastName
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+  }

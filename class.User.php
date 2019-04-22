@@ -30,8 +30,16 @@
      return $this->firstName;
    }
 
+   function setFirstName($fname){
+     $this->firstName = $fname;
+   }
+
    function getLastName(){
      return $this->lastName;
+   }
+
+   function setLastName($lname){
+     $this->lastName = $lname;
    }
 
  }
