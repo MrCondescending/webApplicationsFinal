@@ -1,4 +1,6 @@
 <?php
+  include('config.php');
+
   $user = $_SESSION['user'];
 ?>
 <!doctype html>
@@ -29,10 +31,10 @@
 
           <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
-              </li>
               <li class="nav-item">
+                <a class="nav-link" href="profile.php">Profile <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
                 <a class="nav-link" href="groups.php">Groups</a>
               </li>
               <li class="nav-item">
@@ -51,5 +53,6 @@
             </form>
           </div>
         </nav>
+        <?php echo "TiTS" ?>
       </body>
 </html>
