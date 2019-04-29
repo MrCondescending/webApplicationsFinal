@@ -15,6 +15,9 @@ body{padding-top:3.5rem;}
   height: 2.5rem;            /* Footer height */
 }
 
+#search-bar{
+  padding-right: 5%;
+}
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
