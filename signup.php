@@ -1,7 +1,6 @@
 <?php
   include('config.php');
 
-  include('functions.php');
 
   $usernameInvalid = false; //For error message about invalid username
   // If form submitted:

@@ -160,7 +160,7 @@
                   <div class="col-md-4">
                     <h2><?php echo $group; ?></h2>
                     <p><?php echo getGroupDescription($group, $database); ?></p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-secondary" href="groups.php?group=<?php echo $group?>" role="button">View details &raquo;</a></p>
                   </div>
                   <?php endforeach; ?>
                 </div>
