@@ -1,7 +1,9 @@
 <?php
   include('config.php');
+  include('class.User.php');
+  $username = $_SESSION['username'];
+  $user = new User($username, $database);
 
-  $user = $_SESSION['user'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,12 +49,19 @@
             <form id="search-bar" method="GET" class="form-inline my-2 my-md-0">
               <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="query">
             </form>
-            <?php echo $user.getFirstName(); ?>
+            <h4 style="color:white;padding-right:10px;"> <?php echo $user->getFirstName() ?></h4>
             <form action="logout.php" class="form-inline my-2 my-lg-0">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
             </form>
           </div>
-        </nav>
-        <?php echo "TiTS" ?>
+          </div>
+          <main role="main">
+
+          </main>
+
+          <footer id="footer" class="container">
+            <p>&copy; Devin Workman 2019</p>
+          </footer>
+        </div>
       </body>
 </html>
