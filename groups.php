@@ -1,6 +1,5 @@
 <?php
   include('config.php');
-  include('class.User.php');
   $username = $_SESSION['username'];
   $user = new User($username, $database);
 
@@ -54,14 +53,46 @@
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
             </form>
           </div>
-          </div>
+        </nav>
           <main role="main">
+            <div class="container">
+            <?php if(isset($_GET['query'])): ?>
+              <?php
+                $groups = queryForGroups($_GET['query'], $database);
+                ?>
+                <?php if($groups == Array()): ?>
+                  <h2>No Results Found</h2>
+                <?php else: ?>
+                  <?php foreach($groups as $group): ?>
 
+                    <div style="padding-top:2%;">
+                        <h2><?php echo $group['group_name'];?><br>
+                        <p style="padding-left:2%;"><?php echo $group['group_description']?><br>
+                        
+                        <hr>
+                    </div>
+                  <?php endforeach;
+                endif;
+              ?>
+            <?php else: ?>
+              <div class="row">
+                <h2 style="padding-top:3%;"> Please use the search bar above to search for groups </h2>
+              </div>
+            <?php endif; ?>
+          </div>
           </main>
-
+          </div>
           <footer id="footer" class="container">
             <p>&copy; Devin Workman 2019</p>
           </footer>
         </div>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="js/vendor/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/modal.js"></script>
       </body>
 </html>

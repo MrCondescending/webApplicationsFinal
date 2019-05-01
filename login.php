@@ -56,7 +56,7 @@
         <?php endif;?>
         <!-- Remind Passowrd -->
         <div id="formFooter">
-          <a class="underlineHover" href="#">Forgot Password?</a><br>
+          <!-- NOT USING YET <a class="underlineHover" href="#">Forgot Password?</a><br> -->
           <a class="underlineHover" href="signup.php"> No Account? Click here to sign up!</a>
         </div>
 

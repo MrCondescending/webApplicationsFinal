@@ -99,3 +99,14 @@
     $statement = $database->prepare($sql);
     $statement->execute($params);
   }
+
+  function queryForGroups($query, $database){
+    $sql = file_get_contents('sql/queryGroups.sql');
+    $params = array (
+      'query' => "%" . $query . "%"
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+    $groups =  $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $groups;
+  }
