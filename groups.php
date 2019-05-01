@@ -2,11 +2,12 @@
   include('config.php');
   $username = $_SESSION['username'];
   $user = new User($username, $database);
-
+  $notDone = 1;
 ?>
 <!doctype html>
 <html lang="en">
   <head>
+    <script src="js/modal.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -22,6 +23,7 @@
   </head>
 
   <body>
+
     <div id="page-container">
       <div id="content-wrap">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -63,18 +65,14 @@
                  <h2>Modal Header</h2>
                </div>
                <div class="modal-body">
-                 <form method="POST" class="form-horizontal">
-                   <fieldset>
+                 <h2> Group Members: </h2>
+                 <?php
+                  $users = getUsersInGroup($_GET['group'], $database);
+                  foreach($users as $user): ?>
+                    <h4 style="float:left;"><?php echo $user['username'];?></h4>
+                    <br>
+                 <?php endforeach; ?>
 
-                   <!-- Form Name -->
-                   <legend>Group Members</legend>
-
-                   <div class="control-group">
-                     
-                   </div>
-
-                   </fieldset>
-                   </form>
                </div>
 
               </div>
@@ -92,7 +90,7 @@
                     <div style="padding-top:2%;">
                         <h2><?php echo $group['group_name'];?><br>
                         <p style="padding-left:2%;"><?php echo $group['group_description']?><br>
-                        <button id="profileButton" class="btn btn-primary btn-lg" role="button" style="float:right;">Group Members</button>
+                        <p><a class="btn btn-secondary" href="groups.php?query=<?php echo $_GET['query']?>&group=<?php echo $group['group_name']?>" role="button">View details &raquo;</a></p>
                         <hr style="padding-top:2%;">
                     </div>
                   <?php endforeach;
@@ -103,6 +101,13 @@
                 <h2 style="padding-top:3%;"> Please use the search bar above to search for groups </h2>
               </div>
             <?php endif; ?>
+            <?php
+            if(isset($_GET['group']) && $notDone == 1): ?>
+              <script> document.getElementById('profileModal').style.display = "block"; </script>
+            <?php
+              $notDone = 0;
+              endif;
+            ?>
           </div>
           </main>
           </div>
@@ -117,6 +122,6 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')</script>
         <script src="js/vendor/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/modal.js"></script>
+
       </body>
 </html>

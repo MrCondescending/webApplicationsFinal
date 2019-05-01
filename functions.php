@@ -110,3 +110,14 @@
     $groups =  $statement->fetchAll(PDO::FETCH_ASSOC);
     return $groups;
   }
+
+  function getUsersInGroup($query, $database){
+    $sql = file_get_contents('sql/getUsersInGroup.sql');
+    $params = array (
+      'query' => "%" . $query . "%"
+    );
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+    $users =  $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $users;
+  }
