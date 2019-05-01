@@ -1,2 +1,2 @@
 insert into final_usergroups
-values (:username, '', '', '')
+set username = :username

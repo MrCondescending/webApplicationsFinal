@@ -1,2 +1,6 @@
 insert into final_users
-values (:username, :password, '', '', :dateEntry)
+set username = :username,
+password = :password,
+fname = '',
+lname = '',
+created_date = :dateEntry

@@ -36,7 +36,7 @@
     $statement->execute($params);
   }
 
-  function createUserGroupRow($username, $database){
+  function createUserGroup($username, $database){
     $sql = file_get_contents('sql/createUserGroup.sql');
     $params = array (
       'username' => $username

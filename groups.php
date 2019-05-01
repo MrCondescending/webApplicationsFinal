@@ -55,6 +55,30 @@
           </div>
         </nav>
           <main role="main">
+            <!-- Modal content -->
+            <div id="profileModal" class="modal">
+              <div class="modal-content">
+               <div class="modal-header">
+                 <span class="close">&times;</span>
+                 <h2>Modal Header</h2>
+               </div>
+               <div class="modal-body">
+                 <form method="POST" class="form-horizontal">
+                   <fieldset>
+
+                   <!-- Form Name -->
+                   <legend>Group Members</legend>
+
+                   <div class="control-group">
+                     
+                   </div>
+
+                   </fieldset>
+                   </form>
+               </div>
+
+              </div>
+            </div>
             <div class="container">
             <?php if(isset($_GET['query'])): ?>
               <?php
@@ -68,8 +92,8 @@
                     <div style="padding-top:2%;">
                         <h2><?php echo $group['group_name'];?><br>
                         <p style="padding-left:2%;"><?php echo $group['group_description']?><br>
-                        
-                        <hr>
+                        <button id="profileButton" class="btn btn-primary btn-lg" role="button" style="float:right;">Group Members</button>
+                        <hr style="padding-top:2%;">
                     </div>
                   <?php endforeach;
                 endif;
