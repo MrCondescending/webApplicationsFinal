@@ -3,7 +3,18 @@
   $username = $_SESSION['username'];
   $user = new User($username, $database);
   $notDone = 1;
+
+  if(isset($_POST['Add_Group'])){
+    addGroupToUser($username, $_POST['Add_Group'], $database);
+  }
 ?>
+  <script>window.onclick = function(event) {
+    if (event.target == document.getElementById('profileModal')) {
+      document.getElementById('profileModal').style.display = "none";
+    }
+  }
+  </script>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -69,7 +80,7 @@
                  <?php
                   $users = getUsersInGroup($_GET['group'], $database);
                   foreach($users as $user): ?>
-                    <h4 style="float:left;"><?php echo $user['username'];?></h4>
+                    <h4><?php echo $user['username'];?></h4>
                     <br>
                  <?php endforeach; ?>
 
@@ -90,7 +101,10 @@
                     <div style="padding-top:2%;">
                         <h2><?php echo $group['group_name'];?><br>
                         <p style="padding-left:2%;"><?php echo $group['group_description']?><br>
-                        <p><a class="btn btn-secondary" href="groups.php?query=<?php echo $_GET['query']?>&group=<?php echo $group['group_name']?>" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="groups.php?query=<?php echo $_GET['query']?>&group=<?php echo $group['group_name']?>" role="button">View group members &raquo;</a>
+                        <form method="POST">
+                          <input type="submit" class="btn btn-secondary" name="Add Group" value="<?php echo $group['group_name']?>">
+                        </form>
                         <hr style="padding-top:2%;">
                     </div>
                   <?php endforeach;

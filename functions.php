@@ -121,3 +121,29 @@
     $users =  $statement->fetchAll(PDO::FETCH_ASSOC);
     return $users;
   }
+
+  function addGroupToUser($user, $group, $database){
+    $users_groups = getGroups($user, $database);
+    $groups = $users_groups['groups'];
+    print_r($group);
+    if(strpos($groups, $group) == false && $groups != ''){
+      $groups = $groups . ";" . $group;
+      $sql = file_get_contents('sql/addGroup.sql');
+      $params = array (
+        'groups' => $groups,
+        'username' => $user
+      );
+      $statement = $database->prepare($sql);
+      $statement->execute($params);
+    }
+    else if(strpos($groups, $group) == false){
+      $groups = $group;
+      $sql = file_get_contents('sql/addGroup.sql');
+      $params = array (
+        'groups' => $groups,
+        'username' => $user
+      );
+      $statement = $database->prepare($sql);
+      $statement->execute($params);
+    }
+  }
