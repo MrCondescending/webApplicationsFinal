@@ -1,5 +1,6 @@
 <?php
   include('config.php');
+  $failedLogin = false;
   // If form submitted:
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   	// Get username and password from the form as variables
@@ -18,13 +19,17 @@
   	// If $users is not empty
   	if(!empty($users)) {
   		// Set $user equal to the first result of $users
-  		$user = $users[0];
+      $user = $users[0];
   		// Set a session variable with a key of customerID equal to the customerID returned
   		$_SESSION['username'] = $user['username'];
+
   		// Redirect to the index.php file
-  		header('location: index.php');
+  		header('location: profile.php');
   		die();
   	}
+    else{
+      $failedLogin = true;
+    }
   }
 ?>
 
@@ -47,10 +52,11 @@
           <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
           <input type="submit" class="fadeIn fourth" value="Log In">
         </form>
-
+        <p style="color:red;" ><?php if($failedLogin): ?> You have entered an incorrect username and/or password. Please try again.</p>
+        <?php endif;?>
         <!-- Remind Passowrd -->
         <div id="formFooter">
-          <a class="underlineHover" href="#">Forgot Password?</a><br>
+          <!-- NOT USING YET <a class="underlineHover" href="#">Forgot Password?</a><br> -->
           <a class="underlineHover" href="signup.php"> No Account? Click here to sign up!</a>
         </div>
 

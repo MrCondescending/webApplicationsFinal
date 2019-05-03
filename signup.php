@@ -1,7 +1,6 @@
 <?php
   include('config.php');
 
-  include('functions.php');
 
   $usernameInvalid = false; //For error message about invalid username
   // If form submitted:
@@ -14,6 +13,7 @@
 
     if(validPassword($password, $password_verify) && noUserExists($username, $database)){
       createUser($username, $password, $date, $database);
+      createUserGroup($username, $database);
       header('location: login.php');
       die();
     }else {
